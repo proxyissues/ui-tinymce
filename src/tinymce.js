@@ -97,6 +97,14 @@ angular.module('ui.tinymce', [])
               }
               debouncedUpdate(ed);
             });
+            
+            ed.on('paste', function(){
+				$timeout(function(){
+            		updateView(ed);
+            		ngModel.$setTouched();
+            		scope.$digest();
+            	});
+            });
 
             ed.on('blur', function() {
               element[0].blur();
